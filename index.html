@@ -113,28 +113,21 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            border: 6px solid #1a252f; /* Kalın, koyu dış çerçeve */
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 6px solid #1a252f; /* Kalın, koyu ve estetik dış çerçeve */
+            border-radius: 12px; /* Köşeleri hafif yumuşatmak için */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Derinlik hissi veren gölge efekti */
             overflow: hidden;
         }
 
         /* Genişletilmiş Çerçevenin Üst Başlık Alanı */
         .map-header {
-            background-color: #1a252f;
-            padding: 15px 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            color: white;
-            border-bottom: 2px solid #2c3e50;
-        }
-
-        .map-header-top {
+            background-color: #1a252f; /* Çerçeve rengiyle bütünleşik koyu arka plan */
+            padding: 20px 25px; /* Üst kısmı büyütmek için iç boşluk */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            color: white;
+            border-bottom: 2px solid #2c3e50;
         }
 
         /* Sol Taraftaki Başlık Yazısı */
@@ -143,7 +136,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
-            color: #f39c12; /* Stratejik sarı tonu */
+            color: #f39c12; /* Dikkat çeken askeri/stratejik sarı tonu */
         }
 
         /* Sağ Üst Köşedeki İmzalar */
@@ -160,47 +153,16 @@
             font-style: normal;
         }
 
-        /* Dinamik Filtreleme Butonları Alanı */
-        .filter-container {
-            display: flex;
-            gap: 10px;
-        }
-
-        .filter-btn {
-            background-color: #2c3e50;
-            color: #bdc3c7;
-            border: 1px solid #34495e;
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-        }
-
-        .filter-btn:hover {
-            color: white;
-            background-color: #34495e;
-        }
-
-        .filter-btn.active {
-            background-color: #e74c3c;
-            color: white;
-            border-color: #e74c3c;
-            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.4);
-        }
-
-        /* Harita Alanı */
+        /* Harita Alanı (Kapsayıcının İçinde Kalan Kısım) */
         #map {
             width: 100%;
-            flex: 1; /* Kalan tüm alanı kaplar */
+            flex: 1; /* Kalan tüm dikey alanı haritaya ayırır */
         }
 
-        /* Harita Üstündeki GERÇEK BUTON */
+        /* Harita Üstündeki GERÇEK BUTON (Yukarı Kaydıran Oval Buton) */
         .info-back-btn {
             position: absolute;
-            top: 150px; /* Filtre butonları geldiği için biraz daha aşağı aldık */
+            top: 110px; /* Yeni eklenen geniş üst alandan dolayı butonu aşağı kaydırdık */
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
@@ -211,7 +173,7 @@
             border-radius: 50px;
             font-weight: bold;
             font-size: 0.95rem;
-            text-decoration: none;
+            text-decoration: none; /* Alt çizgiyi kaldırır */
             box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
             cursor: pointer;
             transition: all 0.3s ease;
@@ -224,20 +186,83 @@
             box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
         }
 
-        /* Salınım animasyonu */
+        /* Göstergelerin canlı durması için hafif salınım animasyonu */
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-8px); }
-            60% { transform: translateY(-4px); }
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-8px);
+            }
+            60% {
+                transform: translateY(-4px);
+            }
         }
 
-        /* Popup resimlerinin düzgün hizalanması */
+        /* Popup resimlerinin düzgün hizalanması ve taşmaması için stil */
         .leaflet-popup-content img {
             max-width: 100%;
             height: auto;
             display: block;
             margin-top: 5px;
             border-radius: 4px;
+        }
+
+        /* ================================================================= */
+        /* YENİ EKLENEN: Mobil Cihazlar İçin Uyumluluk Ayarları (Responsive) */
+        /* ================================================================= */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-section p {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            .map-section {
+                height: auto; 
+                min-height: 100vh;
+                padding: 10px; /* Mobilde kenar boşluklarını daraltıyoruz */
+            }
+
+            .map-container {
+                height: 75vh; /* Harita kutusu telefon ekranının %75'ini kaplasın */
+            }
+
+            /* Başlık ve imzayı mobilde düzgünce alt alta alıyoruz */
+            .map-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 8px;
+                padding: 12px 15px;
+            }
+
+            .map-header h2 {
+                font-size: 1.1rem;
+            }
+
+            .map-credits {
+                font-size: 0.75rem;
+            }
+
+            /* Bilgiye geri dön butonunu mobilde haritanın üstünde ortalıyoruz */
+            .info-back-btn {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                display: block;
+                text-align: center;
+                margin: 0 auto 15px auto;
+                width: 90%;
+            }
+            
+            .info-back-btn:hover {
+                transform: translateY(-2px);
+            }
         }
     </style></head><body>
 
@@ -265,16 +290,9 @@
         
         <div class="map-container">
             <div class="map-header">
-                <div class="map-header-top">
-                    <h2>Cakmak Hatti Yuruyus Yolu</h2>
-                    <div class="map-credits">
-                        Powered by "<span>Muhammet Emin Yilmaz</span>" "<span>Selim Taha Erol</span>"
-                    </div>
-                </div>
-                <div class="filter-container">
-                    <button class="filter-btn active" onclick="filterMap('hepsi', this)">🌍 Hepsini Göster</button>
-                    <button class="filter-btn" onclick="filterMap('korugan', this)">🏰 Sadece Koruganlar</button>
-                    <button class="filter-btn" onclick="filterMap('ejder', this)">🛡️ Sadece Ejder Dişleri</button>
+                <h2>Çakmak Hattı Yürüyüş Yolu</h2>
+                <div class="map-credits">
+                    Powered by "<span>Muhammet Emin Yılmaz</span>" <span>-</span> "<span>Selim Taha Erol</span>"
                 </div>
             </div>
             <div id="map"></div>
@@ -282,123 +300,46 @@
     </section>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
     <script>
-        var map;
-        // Filtreleme için marker grupları oluşturuyoruz
-        var koruganGroup = L.layerGroup();
-        var ejderGroup = L.layerGroup();
-
         window.onload = function() {
-            // Haritayı başlatma
-            map = L.map('map', {
+            // Haritayı ilk başta tekerlek zoom'u ve kaydırma kapalı olarak başlatıyoruz
+            var map = L.map('map', {
                 scrollWheelZoom: false,
                 dragging: false,
                 touchZoom: false
-            }).setView([41.116384, 28.537719], 14); 
+            }).setView([41.116384, 28.537719], 14);
 
-            // Uydu görüntüsü katmanı
+            // Uydu görüntüsü katmanı (Esri)
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { 
                 attribution: 'Tiles © Esri'
             }).addTo(map);
 
-            // Farklı renkli ejder dişi için kırmızı marker ikonu tanımlıyoruz
-            var redIcon = new L.Icon({
-                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
-                shadowSize: [41, 41]
-            });
-
-            // Grupları haritaya ekliyoruz (İlk açılışta hepsi görünür)
-            koruganGroup.addTo(map);
-            ejderGroup.addTo(map);
-
-            // --- KORUGAN MARKERLARI (.addTo(koruganGroup) ile eklendi) ---
             // Korugan 1
-            L.marker([41.189229, 28.541042]).addTo(koruganGroup)
+            L.marker([41.189229, 28.541042]).addTo(map)
                 .bindPopup("<b>Korugan 1</b><br>Bölgenin güvenliğini sağlamak amacıyla inşa edilmiştir.<br><img src='https://avatars.mds.yandex.net/i?id=c94eb419705fdfe1871a2688c192c108ed5a7617-12629451-images-thumbs&n=13' style='width:200px;'>");
+
             // Korugan 2
-            L.marker([41.11609284265451, 28.56438760758222]).addTo(koruganGroup)
+            L.marker([41.11609284265451, 28.56438760758222]).addTo(map)
                 .bindPopup("<b>Korugan 2</b><br>Stratejik gözlem noktası olarak kullanılmıştır.<br><img src='https://www.tasarimrehberleri.com/wp-content/uploads/2024/11/defneaksinakyol-9.jpg' style='width:200px;'>");
+
             // Korugan 3
-            L.marker([41.125771374005446, 28.566857922084942]).addTo(koruganGroup)
+            L.marker([41.125771374005446, 28.566857922084942]).addTo(map)
                 .bindPopup("<b>Korugan 3</b><br>Betonarme savunma yapısıdır.<br><img src='https://www.tokihaber.com.tr/wp-content/uploads/2020/01/catalca-cakmak-savunma-hatti.jpg' style='width:200px;'>");
+
             // Korugan 4
-            L.marker([41.1443534653164, 28.57081731933129]).addTo(koruganGroup)
+            L.marker([41.1443534653164, 28.57081731933129]).addTo(map)
                 .bindPopup("<b>Korugan 4</b><br>askeri savunma hattının önemli yapıları arasında yer almıştır.<br><img src='https://iaahbr.tmgrup.com.tr/b5d77a/0/0/0/8/1000/632?u=https://iahbr.tmgrup.com.tr/2023/03/31/cakmak-hatti-koruganlari-1680251286244.jpg' style='width:200px;'>");
+
             // Korugan 5
-            L.marker([41.170761, 28.545900]).addTo(koruganGroup)
+            L.marker([41.170761, 28.545900]).addTo(map)
                 .bindPopup("<b>Korugan 5</b><br>Olası saldırılara karşı koruma amacı taşımıştır.<br><img src='https://avatars.mds.yandex.net/i?id=e6549e2c2a16b4480eaf5a19e825fac150b98e75-5330362-images-thumbs&n=13' style='width:200px;'>");
+
             // Korugan 6
-            L.marker([41.160279, 28.555033]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 6</b><br>Savaş dönemlerinde aktif savunma noktası olarak görev yapmıştır.<br><img src='https://iaahbr.tmgrup.com.tr/b5d77a/0/0/0/8/1000/632?u=https://iahbr.tmgrup.com.tr/2023/03/31/cakmak-hatti-koruganlari-1680251286244.jpg' style='width:200px;'>");
-            // Korugan 7
-            L.marker([41.155829, 28.553952]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 7</b><br>Bölgesel kontrolü sağlamak amacıyla konumlandırılmıştır.<br><img src='https://cdn.kulturenvanteri.com/wp-content/uploads/2021/04/Korugan-Elmasburnu.jpg' style='width:200px;'>");
-            // Korugan 8
-            L.marker([41.151817, 28.553224]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 8</b><br>Stratejik savunma noktalarından biridir.<br><img src='https://haberton.com/wp-content/uploads/2021/07/2nci-dunya-savasinda-rus-tehdidine-karsi-yapilan-koruganlar-arazide-kaldi_6240_dhaphoto9.jpg' style='width:200px;'>");
-            // Korugan 9
-            L.marker([41.144445, 28.548982]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 9</b><br>Gözlem ve savunma amacıyla inşa edilmiştir.<br><img src='https://www.tasarimrehberleri.com/wp-content/uploads/2024/11/Resim2-1.jpg' style='width:200px;'>");
-            // Korugan 10
-            L.marker([41.140833, 28.545833]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 10</b><br>Askeri tarihin izlerini taşıyan önemli yapılardır.<br><img src='https://www.tokihaber.com.tr/wp-content/uploads/2020/01/catalca-cakmak-savunma-hatti.jpg' style='width:200px;'>");
-            // Korugan 11
-            L.marker([41.139722, 28.543056]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 11</b><br>Savunma hattının önemli bir parçasıdır.<br><img src='https://avatars.mds.yandex.net/i?id=818dc7a1cfc887530793c5001f4c0555bc22dcbe-9181674-images-thumbs&n=13' style='width:200px;'>");
-            // Korugan 12
-            L.marker([41.134444, 28.541944]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 12</b><br>Olası tehditlere karşı stratejik koruma alanı.<br><img src='https://iaahbr.tmgrup.com.tr/b5d77a/0/0/0/8/1000/632?u=https://iahbr.tmgrup.com.tr/2023/03/31/cakmak-hatti-koruganlari-1680251286244.jpg' style='width:200px;'>");
-            // Korugan 13
-            L.marker([41.131111, 28.540833]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 13</b><br>Askeri tahkimat mimarisinin bir örneğidir.<br><img src='https://avatars.mds.yandex.net/i?id=c94eb419705fdfe1871a2688c192c108ed5a7617-12629451-images-thumbs&n=13' style='width:200px;'>");
-            // Korugan 14
-            L.marker([41.127500, 28.539444]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 14</b><br>Çatışma riskine karşı güvenli sığınak.<br><img src='https://www.tasarimrehberleri.com/wp-content/uploads/2024/11/defneaksinakyol-9.jpg' style='width:200px;'>");
-            // Korugan 15
-            L.marker([41.121944, 28.538333]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 15</b><br>Kritik geçiş noktalarını denetlemektedir.<br><img src='https://www.tokihaber.com.tr/wp-content/uploads/2020/01/catalca-cakmak-savunma-hatti.jpg' style='width:200px;'>");
-            // Korugan 16
-            L.marker([41.116389, 28.537222]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 16</b><br>Tarihi savunma hattının aktif noktalarından biri.<br><img src='https://iaahbr.tmgrup.com.tr/b5d77a/0/0/0/8/1000/632?u=https://iahbr.tmgrup.com.tr/2023/03/31/cakmak-hatti-koruganlari-1680251286244.jpg' style='width:200px;'>");
-            // Korugan 17
-            L.marker([41.110278, 28.535833]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 17</b><br>Bölgesel güvenliği desteklemektedir.<br><img src='https://avatars.mds.yandex.net/i?id=e6549e2c2a16b4480eaf5a19e825fac150b98e75-5330362-images-thumbs&n=13' style='width:200px;'>");
-            // Korugan 18
-            L.marker([41.104444, 28.533889]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 18</b><br>Stratejik hat üzerindeki yapılardan biri.<br><img src='https://iaahbr.tmgrup.com.tr/b5d77a/0/0/0/8/1000/632?u=https://iahbr.tmgrup.com.tr/2023/03/31/cakmak-hatti-koruganlari-1680251286244.jpg' style='width:200px;'>");
-            // Korugan 19
-            L.marker([41.101111, 28.531944]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 19</b><br>Savunma amaçlı inşa edilen beton sığınak.<br><img src='https://cdn.kulturenvanteri.com/wp-content/uploads/2021/04/Korugan-Elmasburnu.jpg' style='width:200px;'>");
-            // Korugan 20
-            L.marker([41.155512, 28.530312]).addTo(koruganGroup)
-                .bindPopup("<b>Korugan 20</b><br>askeri tarihin izlerini taşıyan önemli yapılardır.<br><img src='https://avatars.mds.yandex.net/i?id=818dc7a1cfc887530793c5001f4c0555bc22dcbe-9181674-images-thumbs&n=13' style='width:200px;'>");
-            // Korugan 21
-            L.circleMarker([41.14611734434927, 28.531006725644254], {
-                radius: 9,
-                color: "#2f4f2f",
-                fillColor: "#228b22",
-                weight: 2,
-                fillOpacity: 1.00
-            }).addTo(koruganGroup)
-            .bindPopup("Korugan 21<br>Bölgesel kontrolü sağlamak amacıyla konumlandırılmıştır.<br><img src='https://iaahbr.tmgrup.com.tr/b5d77a/0/0/0/8/1000/632?u=https://iahbr.tmgrup.com.tr/2023/03/31/cakmak-hatti-koruganlari-1680251286244.jpg' style='width:200px;'>");
+            L.marker([41.160279, 28.555033]).addTo(map)
+                .bindPopup("<b>Korugan 6</b><br>Savaş dönemlerinde aktif savunma noktası olarak görev yapmıştır.<br><img src='https://avatars.mds.yandex.net/i?id=818dc7a1cfc887530793c5001f4c0555bc22dcbe-9181674-images-thumbs&n=13' style='width:200px;'>");
 
-
-            // --- EJDER DİŞLERI MARKERLARI (.addTo(ejderGroup) ile eklendi) ---
-            L.marker([41.229124, 28.591245], {icon: redIcon}).addTo(ejderGroup)
-                .bindPopup("<b>Çakmak Hattı - V Şekilli Ejder Dişleri</b><br>Tarlaların ortasında uydudan zikzak şeklinde netçe görülebilen, fotoğrafını paylaştığın ana anti-tank engel hattı.<br><img src='https://www.tasarimrehberleri.com/wp-content/uploads/2024/11/defneaksinakyol-9.jpg' style='width:200px;'>");
-            
-            L.marker([41.08193281513896, 28.56602822551242], {icon: redIcon}).addTo(ejderGroup)
-                .bindPopup("<b>Çakmak Hattı Ejder Dişleri (Doğu Kanadı)</b><br>Düşman tanklarını durdurmak için inşa edilen sıralı beton antitank engelleri.<br><img src='https://www.tasarimrehberleri.com/wp-content/uploads/2024/11/defneaksinakyol-9.jpg' style='width:200px;'>");
-            
-            // YENİ EKLENEN FARKLI RENKLİ (KIRMIZI) EJDER DİŞİ MARKERI
-            L.marker([41.146336, 28.530514], {icon: redIcon}).addTo(ejderGroup)
-                .bindPopup("<b>Çakmak Hattı - Yeni Ejder Dişi</b><br>Belirtilen koordinattaki savunma tahkimatı yapısı.<br><img src='https://www.tasarimrehberleri.com/wp-content/uploads/2024/11/defneaksinakyol-9.jpg' style='width:200px;'>");
-
-            // ODAK KORUMA FONKSİYONLARI
+            // Sayfa akışını bozmamak için akıllı harita kilitleme özellikleri
             map.on('focus', function() {
                 map.scrollWheelZoom.enable();
                 map.dragging.enable();
@@ -415,28 +356,5 @@
                 map.invalidateSize();
             }, 200);
         };
-
-        // Filtreleme Tetikleyici Fonksiyonu
-        function filterMap(type, button) {
-            // Aktif buton stilini değiştirme
-            var buttons = document.getElementsByClassName('filter-btn');
-            for (var i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove('active');
-            }
-            button.classList.add('active');
-
-            // Katmanları temizle ve seçime göre yeniden ekle
-            map.removeLayer(koruganGroup);
-            map.removeLayer(ejderGroup);
-
-            if (type === 'hepsi') {
-                map.addLayer(koruganGroup);
-                map.addLayer(ejderGroup);
-            } else if (type === 'korugan') {
-                map.addLayer(koruganGroup);
-            } else if (type === 'ejder') {
-                map.addLayer(ejderGroup);
-            }
-        }
     </script>
 </body></html>
